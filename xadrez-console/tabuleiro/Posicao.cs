@@ -1,4 +1,4 @@
-﻿namespace xadrez_console.tabuleiro;
+﻿namespace xadrez_console.Tabuleiro;
 
 class Posicao(int linha, int coluna)
 {

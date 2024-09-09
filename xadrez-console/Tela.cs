@@ -1,10 +1,10 @@
-﻿using xadrez_console.tabuleiro;
+﻿using xadrez_console.Tabuleiro;
 
 namespace xadrez_console;
 
 class Tela
 {
-    public static void imprimirTabuleiro(Tabuleiro tab)
+    public static void ImprimirTabuleiro(Tabuleiros tab)
     {
 
         for (int i = 0; i < tab.Linhas; i++)
