@@ -12,4 +12,9 @@ class Tabuleiro
         Colunas = colunas;
         Pecas = new Peca[linhas, colunas];
     }
+
+    public Peca Peca(int linha, int coluna) 
+    { 
+        return Pecas[linha, coluna];
+    }
 }
