@@ -1,28 +1,15 @@
 ﻿namespace xadrez_console.Tabuleiro;
 
-class Tabuleiros
+class Tabuleiros(int linhas, int colunas)
 {
-    public int Linhas { get; set; }
-    public int Colunas { get; set; }
+    public int Linhas { get; set; } = linhas;
+    public int Colunas { get; set; } = colunas;
 
-    private Peca[,] Pecas;
+    private Peca[,] Pecas = new Peca[linhas, colunas];
 
-    public Tabuleiros(int linhas, int colunas)
-    {
-        Linhas = linhas;
-        Colunas = colunas;
-        Pecas = new Peca[linhas, colunas];
-    }
+    public Peca Peca(int linha, int coluna) => Pecas[linha, coluna];
 
-    public Peca Peca(int linha, int coluna)
-    {
-        return Pecas[linha, coluna];
-    }
-
-    public Peca Peca(Posicao pos)
-    {
-        return Pecas[pos.Linha, pos.Coluna];
-    }
+    public Peca Peca(Posicao pos) => Pecas[pos.Linha, pos.Coluna];
 
     public bool ExistePeca(Posicao pos)
     {

@@ -1,16 +1,8 @@
 ﻿namespace xadrez_console.Tabuleiro;
 
-class Torre : Peca
+class Torre(Tabuleiros tab, Cor cor) : Peca(tab, cor)
 {
-    public Torre(Tabuleiros tab, Cor cor) : base(tab, cor)
-    {
-
-    }
-
-    public override string ToString()
-    {
-        return "T";
-    }
+    public override string ToString() => "T";
 
     private bool PodeMover(Posicao pos)
     {
@@ -38,7 +30,7 @@ class Torre : Peca
         {
             mat[pos.Linha, pos.Coluna] = true;
             if (Tab.Peca(pos) != null && Tab.Peca(pos).Cor != Cor) { break; }
-            pos.Linha = pos.Linha +1;
+            pos.Linha = pos.Linha + 1;
         }
 
         //Direita
