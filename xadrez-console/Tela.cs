@@ -1,10 +1,49 @@
-﻿using xadrez_console.Tabuleiro;
+﻿using System.Diagnostics;
+using System.Net.WebSockets;
+using xadrez_console.Tabuleiro;
 using xadrez_console.Tabuleiro.Xadrez;
 
 namespace xadrez_console;
 
 class Tela
 {
+    public static void ImprimirPartida(PartidaXadrez partida)
+    {
+        ImprimirTabuleiro(partida.Tab);
+        Console.WriteLine();
+        ImprimirPecasCapturadas(partida);
+        Console.WriteLine();
+        Console.WriteLine("Turno : " + partida.Turno);
+        Console.WriteLine("Aguardando jogada : " + partida.JogadorAtual);
+        if (partida.Xeque) {
+            Console.WriteLine("XEQUE!");
+        }
+    }
+
+    public static void ImprimirPecasCapturadas(PartidaXadrez partida)
+    {
+        Console.WriteLine("Peças capturadas" );
+        Console.Write("Brancas: ");
+        ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
+        Console.WriteLine();
+        Console.Write("Pretas: ");
+        ConsoleColor aux = Console.ForegroundColor;
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
+        Console.ForegroundColor = aux;
+        Console.WriteLine();
+    }
+
+    public static void ImprimirConjunto(HashSet<Peca> conjunto)
+    {
+        Console.Write("[");
+        foreach (Peca peca in conjunto)
+        {
+            Console.Write(peca + " ");
+        }
+        Console.WriteLine("]");
+    }
+
     public static void ImprimirTabuleiro(Tabuleiros tab)
     {
         for (int i = 0; i < tab.Linhas; i++)
@@ -61,7 +100,7 @@ class Tela
             else
             {
                 ConsoleColor aux = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write(peca);
                 Console.ForegroundColor = aux;
             }

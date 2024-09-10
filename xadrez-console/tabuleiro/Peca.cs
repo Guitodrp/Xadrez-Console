@@ -8,6 +8,9 @@ abstract class Peca(Tabuleiros tab, Cor cor)
     public Tabuleiros Tab { get; protected set; } = tab;
 
     public void IncrementarQtdMovimentos() => QtdMovimentos++;
+    public void DecrementarQtdMovimentos() => QtdMovimentos--;
+
+    public bool PodeMoverPara(Posicao pos) => MovimentosPossiveis()[pos.Linha, pos.Coluna];
 
     public bool ExistemMovimentosPossiveis()
     {
@@ -16,7 +19,8 @@ abstract class Peca(Tabuleiros tab, Cor cor)
         {
             for (int j = 0; j < Tab.Colunas; j++)
             {
-                if (mat[i, j]) { 
+                if (mat[i, j])
+                {
                     return true;
                 }
             }
