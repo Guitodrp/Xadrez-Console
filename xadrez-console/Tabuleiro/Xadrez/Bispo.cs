@@ -2,10 +2,7 @@
 
 class Bispo(Tabuleiros Tab, Cor cor) : Peca(Tab, cor)
 {
-    public override string ToString()
-    {
-        return "B";
-    }
+    public override string ToString() => "B";
 
     private bool PodeMover(Posicao pos)
     {

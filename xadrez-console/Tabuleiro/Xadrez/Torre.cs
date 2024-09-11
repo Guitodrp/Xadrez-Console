@@ -13,7 +13,7 @@ class Torre(Tabuleiros tab, Cor cor) : Peca(tab, cor)
     public override bool[,] MovimentosPossiveis()
     {
         bool[,] mat = new bool[Tab.Linhas, Tab.Colunas];
-        Posicao pos = new Posicao(0, 0);
+        Posicao pos = new(0, 0);
 
         //Cima
         pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);

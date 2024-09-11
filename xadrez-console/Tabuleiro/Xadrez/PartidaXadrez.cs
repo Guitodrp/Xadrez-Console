@@ -9,8 +9,7 @@ class PartidaXadrez
     public Cor JogadorAtual { get; private set; }
     public bool Terminada { get; private set; }
     public bool Xeque { get; private set; }
-
-    public Peca VulneravelEnPassant { get; private set; }
+    public Peca? VulneravelEnPassant { get; private set; }
 
     private HashSet<Peca> Pecas;
 
@@ -32,6 +31,18 @@ class PartidaXadrez
     #endregion
 
     #region Métodos
+    private static Cor Adversaria(Cor cor)
+    {
+        if (cor == Cor.Branca)
+        {
+            return Cor.Preta;
+        }
+        else
+        {
+            return Cor.Branca;
+        }
+    }
+
     public Peca ExecutaMovimento(Posicao origem, Posicao destino)
     {
         Peca p = Tab.RetirarPeca(origem);
@@ -44,7 +55,8 @@ class PartidaXadrez
         }
 
         //JOGADAESPECIAL ROQUE
-        if (p is Rei && destino.Coluna == origem.Coluna + 2) {
+        if (p is Rei && destino.Coluna == origem.Coluna + 2)
+        {
             Posicao origemTorre = new(origem.Linha, origem.Coluna + 3);
             Posicao destinoTorre = new(origem.Linha, origem.Coluna + 1);
             Peca T = Tab.RetirarPeca(origemTorre);
@@ -62,19 +74,26 @@ class PartidaXadrez
             Tab.ColocarPeca(T, destinoTorre);
         }
 
-        return pecaCapturada;
-    }
+        // #JOGADAESPECIAL EN PASSANT
+        if (p is Peao)
+        {
+            if (origem.Coluna != destino.Coluna && pecaCapturada == null)
+            {
+                Posicao posPeao;
+                if (p.Cor == Cor.Branca)
+                {
+                    posPeao = new Posicao(destino.Linha + 1, destino.Coluna);
+                }
+                else
+                {
+                    posPeao = new Posicao(destino.Linha - 1, destino.Coluna);
+                }
+                pecaCapturada = Tab.RetirarPeca(posPeao);
+                Capturadas.Add(pecaCapturada);
+            }
 
-    private Cor Adversaria(Cor cor)
-    {
-        if (cor == Cor.Branca)
-        {
-            return Cor.Preta;
         }
-        else
-        {
-            return Cor.Branca;
-        }
+        return pecaCapturada;
     }
 
     private Peca Rei(Cor cor)
@@ -194,6 +213,23 @@ class PartidaXadrez
             T.DecrementarQtdMovimentos();
             Tab.ColocarPeca(T, origemTorre);
         }
+
+        //JOGADAESPECIAL EN PASSANT
+        if (p is Peao)
+        {
+            if (origem.Coluna != destino.Coluna && pecaCapturada == VulneravelEnPassant)
+            {
+                Peca peao = Tab.RetirarPeca(destino);
+                Posicao posPeao;
+                if (p.Cor == Cor.Branca)
+                {
+                    posPeao = new Posicao(3, destino.Coluna);
+                }
+                else { 
+                    posPeao = new Posicao(4, destino.Coluna)
+                }
+            }
+        }
     }
 
     public void RealizaJogada(Posicao origem, Posicao destino)
@@ -223,6 +259,18 @@ class PartidaXadrez
         {
             Turno++;
             MudaJogador();
+        }
+
+        Peca p = Tab.Peca(destino);
+
+        //JOGADAESPECIAL EN PASSANT
+        if (p is Peao && (destino.Linha == origem.Linha - 2 || destino.Linha == origem.Linha + 2))
+        {
+            VulneravelEnPassant = p;
+        }
+        else
+        {
+            VulneravelEnPassant = null;
         }
 
     }
@@ -305,8 +353,6 @@ class PartidaXadrez
         Tab.ColocarPeca(peca, new PosicaoXadrez(coluna, linha).ToPosicao());
         Pecas.Add(peca);
     }
-
-
 
     #endregion
 }

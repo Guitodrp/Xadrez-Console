@@ -2,7 +2,7 @@
 
 class Peao(Tabuleiros tab, Cor cor, PartidaXadrez partida) : Peca(tab, cor)
 {
-    private PartidaXadrez Partida = partida;
+    private readonly PartidaXadrez Partida = partida;
 
     public override string ToString() => "P";
 
@@ -47,7 +47,7 @@ class Peao(Tabuleiros tab, Cor cor, PartidaXadrez partida) : Peca(tab, cor)
                 mat[pos.Linha, pos.Coluna] = true;
             }
 
-            // #jogadaespecial en passant
+            // #JOGADAESPECIAL EN PASSANT
             if (Posicao.Linha == 3)
             {
                 Posicao esquerda = new(Posicao.Linha, Posicao.Coluna - 1);
@@ -86,7 +86,7 @@ class Peao(Tabuleiros tab, Cor cor, PartidaXadrez partida) : Peca(tab, cor)
                 mat[pos.Linha, pos.Coluna] = true;
             }
 
-            // #jogadaespecial en passant
+            // #JOGADAESPECIAL EN PASSANT
             if (Posicao.Linha == 4)
             {
                 Posicao esquerda = new(Posicao.Linha, Posicao.Coluna - 1);

@@ -2,10 +2,7 @@
 
 class Cavalo(Tabuleiros tab, Cor cor) : Peca(tab, cor)
 {
-    public override string ToString()
-    {
-        return "C";
-    }
+    public override string ToString() => "C";
 
     private bool PodeMover(Posicao pos)
     {

@@ -4,7 +4,7 @@ namespace xadrez_console.Tabuleiro;
 
 class Rei(Tabuleiros tab, Cor cor, PartidaXadrez partida) : Peca(tab, cor)
 {
-    private PartidaXadrez Partida = partida;
+    private readonly PartidaXadrez Partida = partida;
     public override string ToString() => "R";
 
     private bool PodeMover(Posicao pos)
