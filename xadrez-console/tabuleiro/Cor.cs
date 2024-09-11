@@ -1,5 +1,7 @@
 ﻿namespace xadrez_console.Tabuleiro;
 
+#region Enum
+
 enum Cor
 {
     Branca,
@@ -9,3 +11,5 @@ enum Cor
     Verde
 
 }
+
+#endregion

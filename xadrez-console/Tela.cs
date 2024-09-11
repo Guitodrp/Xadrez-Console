@@ -14,15 +14,23 @@ class Tela
         ImprimirPecasCapturadas(partida);
         Console.WriteLine();
         Console.WriteLine("Turno : " + partida.Turno);
-        Console.WriteLine("Aguardando jogada : " + partida.JogadorAtual);
-        if (partida.Xeque) {
-            Console.WriteLine("XEQUE!");
+        if (!partida.Terminada)
+        {
+            Console.WriteLine("Aguardando jogada : " + partida.JogadorAtual);
+            if (partida.Xeque)
+            {
+                Console.WriteLine("XEQUE!");
+            }
+        }
+        else {
+            Console.WriteLine("XEQUE MATE");
+            Console.WriteLine("Vencedor : " + partida.JogadorAtual);
         }
     }
 
     public static void ImprimirPecasCapturadas(PartidaXadrez partida)
     {
-        Console.WriteLine("Peças capturadas" );
+        Console.WriteLine("Peças capturadas");
         Console.Write("Brancas: ");
         ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
         Console.WriteLine();
@@ -107,6 +115,7 @@ class Tela
             Console.Write(" ");
         }
     }
+
     public static PosicaoXadrez LerPosicaoXadrez()
     {
         string s = Console.ReadLine();

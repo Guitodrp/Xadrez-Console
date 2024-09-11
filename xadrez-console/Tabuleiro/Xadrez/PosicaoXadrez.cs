@@ -1,15 +1,15 @@
 ﻿namespace xadrez_console.Tabuleiro.Xadrez;
 
-class PosicaoXadrez
+class PosicaoXadrez(char coluna, int linha)
 {
-    public char Coluna { get; set; }
-    public int Linha { get; set; }
+    #region Campos
 
-    public PosicaoXadrez(char coluna, int linha)
-    {
-        Coluna = coluna;
-        Linha = linha;
-    }
+    public char Coluna { get; set; } = coluna;
+    public int Linha { get; set; } = linha;
+
+    #endregion
+
+    #region Metodos
 
     public override string ToString()
     {
@@ -20,4 +20,6 @@ class PosicaoXadrez
     {
         return new Posicao(8 - Linha, Coluna - 'a');
     }
+
+    #endregion
 }

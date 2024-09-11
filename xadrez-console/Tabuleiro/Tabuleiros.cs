@@ -2,11 +2,16 @@
 
 class Tabuleiros(int linhas, int colunas)
 {
+    #region Campos
+
     public int Linhas { get; set; } = linhas;
     public int Colunas { get; set; } = colunas;
 
     private Peca[,] Pecas = new Peca[linhas, colunas];
 
+    #endregion
+
+    #region Metodos
     public Peca Peca(int linha, int coluna) => Pecas[linha, coluna];
 
     public Peca Peca(Posicao pos) => Pecas[pos.Linha, pos.Coluna];
@@ -55,4 +60,6 @@ class Tabuleiros(int linhas, int colunas)
             throw new TabuleiroException("Posição Invalida !");
         }
     }
+
+    #endregion
 }

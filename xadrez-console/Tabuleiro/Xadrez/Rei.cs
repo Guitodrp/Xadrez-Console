@@ -1,16 +1,8 @@
 ﻿namespace xadrez_console.Tabuleiro;
 
-class Rei : Peca
+class Rei(Tabuleiros tab, Cor cor) : Peca(tab, cor)
 {
-    public Rei(Tabuleiros tab, Cor cor) : base(tab, cor)
-    {
-
-    }
-
-    public override string ToString()
-    {
-        return "R";
-    }
+    public override string ToString() => "R";
 
     private bool PodeMover(Posicao pos)
     {

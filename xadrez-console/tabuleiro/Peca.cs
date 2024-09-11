@@ -2,15 +2,20 @@
 
 abstract class Peca(Tabuleiros tab, Cor cor)
 {
+    #region Campos
+
     public Posicao? Posicao { get; set; } = null;
     public Cor Cor { get; protected set; } = cor;
     public int QtdMovimentos { get; protected set; } = 0;
     public Tabuleiros Tab { get; protected set; } = tab;
 
-    public void IncrementarQtdMovimentos() => QtdMovimentos++;
-    public void DecrementarQtdMovimentos() => QtdMovimentos--;
+    #endregion
 
-    public bool PodeMoverPara(Posicao pos) => MovimentosPossiveis()[pos.Linha, pos.Coluna];
+    #region Metodos
+
+    public abstract bool[,] MovimentosPossiveis();
+
+    public bool MovimentoPossivel(Posicao pos) => MovimentosPossiveis()[pos.Linha, pos.Coluna];
 
     public bool ExistemMovimentosPossiveis()
     {
@@ -28,6 +33,9 @@ abstract class Peca(Tabuleiros tab, Cor cor)
         return false;
     }
 
-    public abstract bool[,] MovimentosPossiveis();
+    public void IncrementarQtdMovimentos() => QtdMovimentos++;
 
+    public void DecrementarQtdMovimentos() => QtdMovimentos--;
+
+    #endregion
 }
