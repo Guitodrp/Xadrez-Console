@@ -225,8 +225,8 @@ class PartidaXadrez
                 {
                     posPeao = new Posicao(3, destino.Coluna);
                 }
-                else { 
-                    posPeao = new Posicao(4, destino.Coluna)
+                else {
+                    posPeao = new Posicao(4, destino.Coluna);
                 }
             }
         }
